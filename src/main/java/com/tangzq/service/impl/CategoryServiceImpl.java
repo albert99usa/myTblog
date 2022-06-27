@@ -14,21 +14,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-
 /**
  * @author tangzhiqiang
  */
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryRepository categoryRepository;
 
-
     @Override
     public boolean isCategoryExisted(String catdir) {
-        List<Category> catList=categoryRepository.findBycatdir(catdir);
-        if(null!=catList&&!catList.isEmpty()){
+        List<Category> catList = categoryRepository.findBycatdir(catdir);
+        if (null != catList && !catList.isEmpty()) {
             return true;
         }
         return false;
@@ -36,17 +34,18 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public Category addCategory(Category cat) {
-      return  categoryRepository.save(cat);
+        return categoryRepository.save(cat);
     }
 
     @Override
     public Category findById(String id) {
-        Optional<Category> optional=categoryRepository.findById(Long.parseLong(id));
-        return optional.isPresent()?optional.get():null;
+        Optional<Category> optional = categoryRepository.findById(Long.parseLong(id));
+        return optional.isPresent() ? optional.get() : null;
     }
 
     /**
-     * 注意：这里Page的页码是从0开始，所以取值需要传递过来的页码减去1
+     * 注意：這裡Page的頁碼是從0開始，所以取值需要傳遞過來的頁碼減去1
+     * 
      * @param pageNo
      * @param pageSize
      * @return
@@ -54,30 +53,30 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public Page<Category> findByPage(int pageNo, int pageSize) {
         Sort sort = Sort.by(Sort.Direction.DESC, "createat");
-        Pageable pageable =PageRequest.of(pageNo-1, pageSize, sort);
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
         return categoryRepository.findAll(pageable);
     }
 
     @Override
     public List<Category> findAll() {
-        return (List<Category>)categoryRepository.findAll();
+        return (List<Category>) categoryRepository.findAll();
     }
 
     @Override
     public Category updateById(Category cat, String id) {
-        Category catInDB=findById(id);
-        if(null==catInDB){
+        Category catInDB = findById(id);
+        if (null == catInDB) {
             return null;
         }
         cat.setId(Long.parseLong(id));
         /*
-        if(catInDB.getCreateAt()==null){
-            cat.setCreateAt((java.sql.Date) new Date());
-        }
-        else {
-            cat.setCreateAt(  catInDB.getCreateAt());
-        }
-*/
+         * if(catInDB.getCreateAt()==null){
+         * cat.setCreateAt((java.sql.Date) new Date());
+         * }
+         * else {
+         * cat.setCreateAt( catInDB.getCreateAt());
+         * }
+         */
         return categoryRepository.save(cat);
     }
 

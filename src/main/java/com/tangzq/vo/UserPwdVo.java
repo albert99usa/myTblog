@@ -15,17 +15,17 @@ import javax.validation.constraints.Size;
 @ToString
 public class UserPwdVo {
 
-//    private String uid;
+    // private String uid;
     private int uid;
     private String username;
 
-    @NotEmpty(message = "旧密码不能为空")
+    @NotEmpty(message = "舊密碼不能為空")
     private String oldPwd;
 
-    @NotEmpty(message = "新密码不能为空")
-    @Size(min = 6, max = 15, message = "新密码必须在6到15个字符")
+    @NotEmpty(message = "新密碼不能為空")
+    @Size(min = 6, max = 15, message = "新密碼必須在6到15個字元")
     private String newPwd;
 
-    @NotEmpty(message = "新密码不能为空")
+    @NotEmpty(message = "新密碼不能為空")
     private String repeatNewPwd;
 }
