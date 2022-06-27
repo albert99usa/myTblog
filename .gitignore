@@ -1,0 +1,8 @@
+.idea
+tblog.iml
+target
+src/main/resources/.DS_Store
+*.DS_Store
+.m2
+.settings
+target
